@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Галерея | NeuroTech</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0a0f2c',
+            secondary: '#0e1b40',
+            accent: '#70e0ff',
+            dark: '#141c3a',
+            light: '#f0f9ff',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0f2c;
+      color: white;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #70e0ff, #a8ff78);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <nav class="w-full bg-secondary py-4 shadow-lg">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold gradient-text">NeuroTech</a>
+      <a href="index.html" class="text-light hover:text-accent transition">На главную</a>
+    </div>
+  </nav>
+
+  <header class="pt-24 pb-12 text-center">
+    <h1 class="text-5xl font-bold gradient-text mb-4">Галерея платформы</h1>
+    <p class="text-light text-lg">Все изображения, использованные на платформе</p>
+  </header>
+
+  <main class="container mx-auto px-6 pb-20">
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+      <div class="break-inside-avoid cursor-pointer" onclick="openModal('archAI.png')">
+        <img src="archAI.png" alt="Архитектура нейросети" class="w-full rounded-xl shadow-xl">
+        <p class="mt-2 text-center text-light text-base">Архитектура нейросети</p>
+      </div>
+      <div class="break-inside-avoid cursor-pointer" onclick="openModal('brainscan.png')">
+        <img src="brainscan.png" alt="Картирование мозга" class="w-full rounded-xl shadow-xl">
+        <p class="mt-2 text-center text-light text-base">Картирование мозга</p>
+      </div>
+      <div class="break-inside-avoid cursor-pointer" onclick="openModal('neurolink.png')">
+        <img src="neurolink.png" alt="Нейроимпланты" class="w-full rounded-xl shadow-xl">
+        <p class="mt-2 text-center text-light text-base">Нейроимпланты</p>
+      </div>
+      <div class="break-inside-avoid cursor-pointer" onclick="openModal('VR.png')">
+        <img src="VR.png" alt="VR и сознание" class="w-full rounded-xl shadow-xl">
+        <p class="mt-2 text-center text-light text-base">VR и сознание</p>
+      </div>
+      <div class="break-inside-avoid cursor-pointer" onclick="openModal('AIandHuman.png')">
+        <img src="AIandHuman.png" alt="Симбиоз ИИ и человека" class="w-full rounded-xl shadow-xl">
+        <p class="mt-2 text-center text-light text-base">Симбиоз ИИ и человека</p>
+      </div>
+      <div class="break-inside-avoid cursor-pointer" onclick="openModal('AIundying.png')">
+        <img src="AIundying.png" alt="Цифровое бессмертие" class="w-full rounded-xl shadow-xl">
+        <p class="mt-2 text-center text-light text-base">Цифровое бессмертие</p>
+      </div>
+
+      <div class="break-inside-avoid cursor-pointer" onclick="openModal('AIandBrain.png')">
+        <img src="AIandBrain.png" alt="ИИ и мозг" class="w-full rounded-xl shadow-xl">
+        <p class="mt-2 text-center text-light text-base">ИИ и мозг</p>
+      </div>
+      <div class="break-inside-avoid cursor-pointer" onclick="openModal('brain.png')">
+        <img src="brain.png" alt="Компьютер внутри нас" class="w-full rounded-xl shadow-xl">
+        <p class="mt-2 text-center text-light text-base">Компьютер внутри нас</p>
+      </div>
+      <div class="break-inside-avoid cursor-pointer" onclick="openModal('NeuroAPI.png')">
+        <img src="NeuroAPI.png" alt="Нейроинтерфейсы" class="w-full rounded-xl shadow-xl">
+        <p class="mt-2 text-center text-light text-base">Нейроинтерфейсы</p>
+      </div>
+
+
+
+
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="imageModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+    <div class="relative max-w-full max-h-full p-4">
+      <button onclick="closeModal()" class="absolute top-2 right-2 text-white text-3xl z-50">&times;</button>
+      <img id="modalImage" src="" class="max-h-screen max-w-full rounded-xl shadow-2xl">
+    </div>
+  </div>
+
+  <footer class="py-12 bg-secondary text-center text-light text-sm">
+    <p>© 2025 NeuroTech. Все права защищены. Образовательный некоммерческий проект.</p>
+  </footer>
+
+  <script>
+    function openModal(src) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modalImg.src = src;
+      modal.classList.remove('hidden');
+    }
+    function closeModal() {
+      document.getElementById('imageModal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

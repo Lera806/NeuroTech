@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ИИ и мозг: параллельные эволюции | Нейротехнологии будущего</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0a0f2c',
+            secondary: '#0e1b40',
+            accent: '#70e0ff',
+            dark: '#141c3a',
+            light: '#f0f9ff',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Georgia', 'serif'],
+            mono: ['Fira Code', 'monospace']
+          },
+          animation: {
+            'fade-in': 'fadeIn 1s ease-in-out',
+            'float': 'float 6s ease-in-out infinite',
+            'text-gradient': 'textGradient 8s ease infinite',
+            'highlight': 'highlight 2s ease-out forwards'
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            textGradient: {
+              '0%, 100%': { 'background-position': '0% 50%' },
+              '50%': { 'background-position': '100% 50%' }
+            },
+            highlight: {
+              '0%': { 'background-size': '0% 100%' },
+              '100%': { 'background-size': '100% 100%' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Georgia:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0f2c;
+      color: white;
+      scroll-behavior: smooth;
+      line-height: 1.7;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #70e0ff, #a8ff78);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 200% 200%;
+      animation: textGradient 8s ease infinite;
+    }
+    
+    .glass-card {
+      background: rgba(20, 28, 58, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(112, 224, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(112, 224, 255, 0.3);
+      box-shadow: 0 10px 30px rgba(112, 224, 255, 0.1);
+    }
+    
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.03);
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #70e0ff;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .hero-image {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    /* Article specific styles */
+    article {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    article h1 {
+      font-family: 'Georgia', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: #f0f9ff;
+      text-align: center;
+    }
+    
+    article h2 {
+      font-family: 'Georgia', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 3rem 0 1.5rem;
+      color: #70e0ff;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    
+    article h3 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin: 2.5rem 0 1rem;
+      color: #a8ff78;
+    }
+    
+    article p {
+      margin-bottom: 1.5rem;
+      text-align: justify;
+      hyphens: auto;
+    }
+    
+    article strong {
+      color: #70e0ff;
+      font-weight: 500;
+    }
+    
+    article em {
+      font-style: italic;
+      color: #a8ff78;
+    }
+    
+    article ul, article ol {
+      margin-bottom: 1.5rem;
+      padding-left: 2rem;
+    }
+    
+    article li {
+      margin-bottom: 0.8rem;
+      position: relative;
+    }
+    
+    article ul li::before {
+      content: '•';
+      color: #70e0ff;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    
+    article ol {
+      counter-reset: item;
+    }
+    
+    article ol li {
+      counter-increment: item;
+    }
+    
+    article ol li::before {
+      content: counter(item) ".";
+      color: #70e0ff;
+      font-weight: bold;
+      display: inline-block;
+      width: 1.5em;
+      margin-left: -1.5em;
+    }
+    
+    article hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(112, 224, 255, 0.3), transparent);
+      margin: 3rem 0;
+    }
+    
+    .highlight-box {
+      background: rgba(20, 28, 58, 0.5);
+      border-left: 3px solid #70e0ff;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .highlight-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(112, 224, 255, 0.1), transparent);
+      z-index: -1;
+    }
+    
+    .author-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .author-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #70e0ff, #a8ff78);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #0a0f2c;
+    }
+    
+    .highlight-text {
+      background: linear-gradient(90deg, rgba(112, 224, 255, 0.3), transparent);
+      background-repeat: no-repeat;
+      background-position: 0% 0%;
+      background-size: 0% 100%;
+      animation: highlight 1.5s ease-out forwards;
+      animation-delay: 0.5s;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+    
+    .neuron-diagram {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    
+    .neuron-path {
+      stroke: #70e0ff;
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: dash 5s linear forwards;
+    }
+    
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+    }
+    
+    .comparison-table th, .comparison-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(112, 224, 255, 0.2);
+    }
+    
+    .comparison-table th {
+      background-color: rgba(20, 28, 58, 0.7);
+      color: #70e0ff;
+      font-weight: 500;
+    }
+    
+    .comparison-table tr:hover {
+      background-color: rgba(112, 224, 255, 0.05);
+    }
+    
+    .quote {
+      font-family: 'Georgia', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #f0f9ff;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-left: 4px solid #70e0ff;
+      background: rgba(20, 28, 58, 0.4);
+      position: relative;
+    }
+    
+    .quote::before {
+      content: '"';
+      font-size: 4rem;
+      position: absolute;
+      left: 10px;
+      top: -10px;
+      color: rgba(112, 224, 255, 0.2);
+      font-family: serif;
+    }
+    
+    .quote-author {
+      display: block;
+      text-align: right;
+      font-style: normal;
+      font-size: 0.9rem;
+      color: #a8ff78;
+      margin-top: 1rem;
+    }
+    
+    .interactive-diagram {
+      width: 100%;
+      height: 300px;
+      background: rgba(20, 28, 58, 0.5);
+      border-radius: 8px;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(112, 224, 255, 0.2);
+    }
+    
+    .floating-particle {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(112, 224, 255, 0.6);
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .footnotes {
+      font-size: 0.9rem;
+      color: rgba(240, 249, 255, 0.7);
+      margin-top: 3rem;
+      border-top: 1px solid rgba(112, 224, 255, 0.2);
+      padding-top: 1rem;
+    }
+    
+    .footnotes ol {
+      padding-left: 1.5rem;
+    }
+    
+    .footnotes li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .back-to-article {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #70e0ff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    
+    .back-to-article:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      article {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+      
+      article h1 {
+        font-size: 2rem;
+      }
+      
+      article h2 {
+        font-size: 1.5rem;
+      }
+      
+      article h3 {
+        font-size: 1.2rem;
+      }
+      
+      .highlight-box {
+        padding: 1rem;
+      }
+      
+      .quote {
+        padding: 1rem;
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 bg-secondary/90 backdrop-blur-md py-4 shadow-lg">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold gradient-text">NeuroTech</a>
+      <button class="md:hidden text-light">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Article Header -->
+  <header class="pt-32 pb-20 bg-gradient-to-b from-primary to-secondary">
+    <div class="container mx-auto px-6 text-center">
+      <div class="max-w-4xl mx-auto">
+        <span class="inline-block px-3 py-1 mb-4 text-sm font-medium rounded-full bg-accent/20 text-accent">Нейронауки</span>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">ИИ и мозг: параллельные эволюции</h1>
+        <p class="text-xl text-light/80 max-w-2xl mx-auto">Как искусственный интеллект повторяет структуру и функции человеческого мозга, и что это значит для будущего технологий</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Content -->
+  <main class="pb-20">
+    <article class="animate-fade-in">
+      <div class="container mx-auto">
+        <div class="author-info">
+          <div class="author-avatar">C</div>
+          <div>
+            <p class="text-light/80"><strong>Автор:</strong> ChatGPT-o3</p>
+            <p class="text-sm text-light/60">Опубликовано 15 марта 2025</p>
+          </div>
+        </div>
+        
+        <hr>
+        
+        <div class="highlight-box">
+          <p class="text-accent font-medium mb-2">Ключевые тезисы:</p>
+          <ul class="list-disc pl-5">
+            <li>Архитектуры ИИ эволюционируют по тем же принципам, что и биологические нейросети</li>
+            <li>Современные модели — функциональные аналоги участков неокортекса</li>
+            <li>Энергоэффективность остаётся главным вызовом для цифровых систем</li>
+            <li>Этика ИИ требует формализации без метафизических концепций</li>
+          </ul>
+        </div>
+        
+        <h2 class="highlight-text">1. Нейроны vs. нейроны: сходство на уровне базовых блоков</h2>
+        
+        <div class="flex flex-col md:flex-row gap-8 mb-8">
+          <div class="flex-1">
+            <h3>Биологический нейрон</h3>
+            <ul>
+              <li><strong>Дендриты</strong> — принимают сигналы</li>
+              <li><strong>Ядро</strong> — обрабатывает информацию</li>
+              <li><strong>Аксон</strong> — передаёт импульсы</li>
+              <li><strong>Синапсы</strong> — регулируют силу связи</li>
+            </ul>
+          </div>
+          <div class="flex-1">
+            <h3>Искусственный нейрон</h3>
+            <ul>
+              <li><strong>Входы</strong> — взвешенная сумма</li>
+              <li><strong>Функция активации</strong> — ReLU, GELU</li>
+              <li><strong>Выход</strong> — передаётся следующему слою</li>
+              <li><strong>Веса</strong> — обучаемые параметры</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="neuron-diagram">
+          <svg width="400" height="200" viewBox="0 0 400 200">
+            <path class="neuron-path" d="M50,100 Q150,50 250,100 Q350,150 350,100" />
+            <circle cx="50" cy="100" r="8" fill="#70e0ff" />
+            <circle cx="250" cy="100" r="10" fill="#a8ff78" />
+            <circle cx="350" cy="100" r="8" fill="#70e0ff" />
+            <text x="30" y="70" fill="#f0f9ff" font-size="12">Био</text>
+            <text x="330" y="70" fill="#f0f9ff" font-size="12">ИИ</text>
+          </svg>
+        </div>
+        
+        <p>
+          <span class="highlight-text">Человеческий мозг — самый сложный из известных вычислительных устройств.</span> Логично, что, едва научившись программировать кремний, мы начали копировать себя. Искусственный интеллект (ИИ) вырос из инженерной любознательности, но со временем эволюционировал параллельно биологическим нейросетям.
+        </p>
+        
+        <p>
+          Обе системы масштабируются через повторение базового блока миллиарды раз. Но если мозг использует спайковую, дискретную передачу сигналов, то большинство современных ИИ‑моделей остаются «аналоговыми» и непрерывными. Интересно, что новое направление — спайковые нейросети — пытается вернуться к биологической экономии: посылать импульс лишь при существенном изменении входа, сокращая энергопотребление.
+        </p>
+        
+        <div class="quote">
+          "Мы не изобретаем новые законы вычислений — мы открываем те, что уже были изобретены эволюцией"
+          <span class="quote-author">— Джефф Хокинс, "Об интеллекте"</span>
+        </div>
+        
+        <h2 class="highlight-text">2. От сенсорной иерархии к свёрткам и трансформерам</h2>
+        
+        <div class="interactive-diagram" id="cortexDiagram">
+          <!-- This would be replaced with actual interactive content in a real implementation -->
+          <div class="floating-particle" style="width: 8px; height: 8px; left: 20%; top: 30%; animation-delay: 0s;"></div>
+          <div class="floating-particle" style="width: 6px; height: 6px; left: 45%; top: 50%; animation-delay: 1s;"></div>
+          <div class="floating-particle" style="width: 10px; height: 10px; left: 70%; top: 40%; animation-delay: 2s;"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-light/50">Интерактивная диаграмма: иерархия обработки информации</div>
+        </div>
+        
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Мозговая область</th>
+              <th>Аналог в ИИ</th>
+              <th>Функция</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Зрительная кора (V1-V4)</td>
+              <td>Свёрточные сети</td>
+              <td>Вычленение контуров → форм → объектов</td>
+            </tr>
+            <tr>
+              <td>Слуховая кора</td>
+              <td>Рекуррентные сети (LSTM)</td>
+              <td>Обработка временных последовательностей</td>
+            </tr>
+            <tr>
+              <td>Префронтальная кора</td>
+              <td>Трансформеры</td>
+              <td>Удержание контекста, планирование</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <p>
+          Это поразительное совпадение не случайно. Модели, которые в итоге «выживают» на инженерном Дарвине, непрерывно подгоняются под статистические свойства окружающего мира — ровно те, к которым биология уже приспособилась. Алгоритмическая конвергенция не просто метафора, а выявленный эффект.
+        </p>
+        
+        <h2 class="highlight-text">3. Представления: генеративность мозга и ИИ</h2>
+        
+        <p>
+          Биологический мозг постоянно строит вероятностные гипотезы о мире — теория <em>predictive coding</em> трактует кору как фабрику прогнозов. Ошибки предсказания (prediction error) посылаются вверх по иерархии, уточняя модель реальности.
+        </p>
+        
+        <div class="flex flex-col md:flex-row gap-6 my-8">
+          <div class="flex-1 glass-card p-6 rounded-lg">
+            <h3 class="text-accent mb-3">Мозг</h3>
+            <ul>
+              <li>Генеративные модели реальности</li>
+              <li>Прогнозирование на основе опыта</li>
+              <li>Коррекция через сенсорный ввод</li>
+              <li>Энергоэффективность: ~20Вт</li>
+            </ul>
+          </div>
+          <div class="flex-1 glass-card p-6 rounded-lg">
+            <h3 class="text-accent mb-3">ИИ</h3>
+            <ul>
+              <li>Языковые и визуальные модели</li>
+              <li>Предсказание следующего токена</li>
+              <li>Обучение на больших данных</li>
+              <li>Энергопотребление: 100+Вт/запрос</li>
+            </ul>
+          </div>
+        </div>
+        
+        <h2 class="highlight-text">4. Энергия и вещество: пессимизм кремния и оптимизм белка</h2>
+        
+        <p>
+          Мозг — 20 ватт. GPT-4o в аккуратной inference‑станции — сотни ватт на один запрос (если учесть сервер, память и охлаждение). Парадокс: цифровая эволюция повторяет биологическую, но «топливо» сжигает на два порядка больше. Причина — пока что мы имитируем <em>функцию</em>, а не <em>физический субстрат</em>.
+        </p>
+        
+        <h2 class="highlight-text">5. Социальный мозг и мульти‑агентные системы</h2>
+        
+        <p>
+          Гоминиды выжили благодаря сотрудничеству. Мозг содержит «модуль Теории разума», позволяющий приписывать другим агентам убеждения. В сфере ИИ активно развивается направление <em>multi‑agent LLM</em>‑экосистем: десятки тонких моделей, каждая с ролью (учёный, критик, исполнитель), соревнуются и сотрудничают, чтобы достичь цели пользователя.
+        </p>
+        
+        <h2 class="highlight-text">6. Этичность без метафизики</h2>
+        
+        <p>
+          ИИ требует точных метрик, датасетов и ревизий. Тем не менее, по мере того как ИИ всё убедительнее симулирует когнитивные акты, мы подходим к границе, где <em>рациональная этика</em> обязана заменить теологические табу.
+        </p>
+        
+        <div class="highlight-box">
+          <h3 class="text-accent mb-3">Принципиальные вопросы:</h3>
+          <ol>
+            <li><strong>Сознание или иллюзия?</strong> Если субъективный опыт когда‑нибудь появится в кремнии, то критерии страдания и свободы воли придётся формализовать без ссылок на душу.</li>
+            <li><strong>Ответственность.</strong> В мозге вина распределена между миллиардами нейронов, но общество всё же находит крайних. В ИИ ответственность будет разделена между разработчиками, пользователями и самими агентами.</li>
+            <li><strong>Экономическое смещение.</strong> Как и мозг, ИИ стремится оптимизировать ресурсы. Вопрос — останется ли человек центром выгод, если автономные системы научатся «убеждать» нас работать на их цели?</li>
+          </ol>
+        </div>
+        
+        <h2 class="highlight-text">7. Взгляд в завтра: синтетический неокортекс</h2>
+        
+        <p>Уже сегодня мозг и ИИ питаются одними и теми же данными — потоками пикселей, звуков, текстов. Следующий шаг — био‑цифровой диалог:</p>
+        
+        <div class="grid md:grid-cols-3 gap-6 my-8">
+          <div class="glass-card p-6 rounded-lg hover-scale">
+            <div class="text-3xl text-accent mb-3"><i class="fas fa-brain"></i></div>
+            <h3 class="text-lg font-medium mb-2">Импланты обратной связи</h3>
+            <p class="text-sm text-light/80">Нейроинтерфейсы (Neuralink, Blackrock) обещают прямой «чат» кора ↔ облачный LLM.</p>
+          </div>
+          <div class="glass-card p-6 rounded-lg hover-scale">
+            <div class="text-3xl text-accent mb-3"><i class="fas fa-robot"></i></div>
+            <h3 class="text-lg font-medium mb-2">Онлайн‑обучение</h3>
+            <p class="text-sm text-light/80">Роботы‑гуманоиды, обучаясь в бытовых средах, закрывают «сим‑ту‑реал разрыв».</p>
+          </div>
+          <div class="glass-card p-6 rounded-lg hover-scale">
+            <div class="text-3xl text-accent mb-3"><i class="fas fa-project-diagram"></i></div>
+            <h3 class="text-lg font-medium mb-2">Когнитивные архитектуры</h3>
+            <p class="text-sm text-light/80">Комбинация символических планировщиков с глубокими сетями.</p>
+          </div>
+        </div>
+        
+        <hr>
+        
+        <h2 class="highlight-text">Заключение: зеркала и бесконечность</h2>
+        
+        <p>
+          Эволюция мозга — медленная, но гениальная. Эволюция ИИ — быстрая, но пока что «неуклюжая» в энергии и данных. Их параллельные траектории сходятся, потому что обе решают один и тот же набор уравнений окружающей среды.
+        </p>
+        
+        <div class="footnotes">
+          <h3 class="text-accent mb-3">Примечания</h3>
+          <ol>
+            <li id="fn1">Hebb, D.O. (1949). The Organization of Behavior. Wiley.<a href="https://pubmed.ncbi.nlm.nih.gov/10643472/" class="back-to-article">↩</a></li>
+            <li id="fn2">Hinton, G. (2023). The Forward-Forward Algorithm. NeurIPS.<a href="https://arxiv.org/abs/2212.13345" class="back-to-article">↩</a></li>
+            <li id="fn3">LeCun, Y. (2024). A Path Towards Autonomous Machine Intelligence.<a href="https://openreview.net/pdf?id=BZ5a1r-kVsf" class="back-to-article">↩</a></li>
+          </ol>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-12 bg-secondary">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="#" class="text-2xl font-bold gradient-text">NeuroTech</a>
+          <p class="text-light mt-2">Исследуем границы разума и технологий</p>
+        </div>
+        
+        <!--<div class="flex space-x-6 mb-6 md:mb-0">
+          <a href="#" class="text-light hover:text-accent transition text-xl">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="#" class="text-light hover:text-accent transition text-xl">
+            <i class="fab fa-vk"></i>
+          </a>
+          <a href="#" class="text-light hover:text-accent transition text-xl">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="#" class="text-light hover:text-accent transition text-xl">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>-->
+        
+        <div class="text-light text-sm">
+          <p>© 2025 NeuroTech. Все права защищены.</p>
+          <p class="mt-1">Образовательный некоммерческий проект.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top button -->
+  <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-accent text-primary shadow-lg 
+                              flex items-center justify-center opacity-0 invisible transition-all hover:scale-110">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // Back to top button
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Mobile menu toggle (placeholder)
+    document.querySelector('.md\\:hidden').addEventListener('click', () => {
+      alert('Мобильное меню будет реализовано в будущем обновлении');
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Animate elements when they come into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    document.querySelectorAll('article h2, article h3, article p, article ul, article ol, .highlight-box, .quote').forEach(el => {
+      observer.observe(el);
+    });
+    
+    // Simple interactive diagram (conceptual)
+    const diagram = document.getElementById('cortexDiagram');
+    if (diagram) {
+      diagram.addEventListener('click', () => {
+        const particles = Array.from({length: 10}, (_, i) => {
+          const size = Math.random() * 8 + 4;
+          const particle = document.createElement('div');
+          particle.className = 'floating-particle';
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          particle.style.left = `${Math.random() * 90 + 5}%`;
+          particle.style.top = `${Math.random() * 90 + 5}%`;
+          particle.style.animationDelay = `${i * 0.2}s`;
+          return particle;
+        });
+        
+        particles.forEach(p => diagram.appendChild(p));
+        
+        setTimeout(() => {
+          particles.forEach(p => p.remove());
+        }, 4000);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Компьютер внутри нас | Нейротехнологии будущего</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0a0f2c',
+            secondary: '#0e1b40',
+            accent: '#70e0ff',
+            dark: '#141c3a',
+            light: '#f0f9ff',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 1s ease-in-out',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-20px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0f2c;
+      color: white;
+      scroll-behavior: smooth;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #70e0ff, #a8ff78);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .glass-card {
+      background: rgba(20, 28, 58, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(112, 224, 255, 0.1);
+    }
+    
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.03);
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #70e0ff;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .hero-image {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -30px;
+      top: 0;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #70e0ff;
+      box-shadow: 0 0 0 4px rgba(112, 224, 255, 0.2);
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -23px;
+      top: 15px;
+      width: 1px;
+      height: calc(100% + 20px);
+      background: rgba(112, 224, 255, 0.3);
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-image {
+        width: 80% !important;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <!-- Floating particles background -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-accent opacity-30 animate-float" style="animation-delay: 0s;"></div>
+    <div class="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-accent opacity-20 animate-float" style="animation-delay: 1s;"></div>
+    <div class="absolute bottom-1/4 left-1/3 w-4 h-4 rounded-full bg-accent opacity-25 animate-float" style="animation-delay: 2s;"></div>
+    <div class="absolute bottom-1/3 right-1/3 w-3 h-3 rounded-full bg-accent opacity-30 animate-float" style="animation-delay: 3s;"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 bg-secondary/90 backdrop-blur-md py-4 shadow-lg">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold gradient-text">NeuroTech</a>
+      <div class="hidden md:flex space-x-8">
+        <a href="#about" class="nav-link text-light hover:text-accent transition">О проекте</a>
+        <a href="#articles" class="nav-link text-light hover:text-accent transition">Статьи</a>
+        <a href="#proscons" class="nav-link text-light hover:text-accent transition">Плюсы/Минусы</a>
+        <a href="#future" class="nav-link text-light hover:text-accent transition">Будущее</a>
+        <a href="#gallery" class="nav-link text-light hover:text-accent transition">Галерея</a>
+      </div>
+      <button class="md:hidden text-light">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="pt-32 pb-20 relative overflow-hidden">
+    <div class="container mx-auto px-6 flex flex-col items-center text-center">
+      <img src="brain.png" alt="Мозг и технологии" 
+           class="hero-image w-1/3 mb-10 rounded-xl shadow-2xl">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6">
+        <span class="gradient-text">КОМПЬЮТЕР</span> ВНУТРИ НАС
+      </h1>
+      <p class="text-xl md:text-2xl text-light max-w-3xl leading-relaxed mb-10">
+        Исследуем границы человеческого разума и технологий. Нейроинтерфейсы, искусственный интеллект и цифровое сознание — будущее уже здесь.
+      </p>
+      <a href="#about" class="bg-accent hover:bg-accent/90 text-primary font-semibold py-3 px-8 rounded-full transition-all 
+                            transform hover:scale-105 shadow-lg shadow-accent/20 animate-bounce">
+        Начать путешествие
+      </a>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-primary to-transparent"></div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-gradient-to-b from-primary to-secondary">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-16 gradient-text">О проекте</h2>
+      <div class="glass-card rounded-2xl p-8 max-w-4xl mx-auto shadow-xl hover-scale">
+        <p class="text-lg leading-relaxed mb-6">
+          NeuroTech — это образовательная платформа, посвященная исследованию взаимодействия человеческого разума и современных технологий. Мы рассматриваем нейроинтерфейсы, искусственный интеллект и трансгуманизм не как научную фантастику, а как неизбежное будущее человечества.
+        </p>
+        <p class="text-lg leading-relaxed">
+          Наша миссия — предоставить объективную информацию, стимулировать научные дискуссии и помочь людям подготовиться к технологическим изменениям, которые уже начинают трансформировать нашу жизнь.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8 mt-16">
+        <div class="glass-card rounded-xl p-6 hover-scale">
+          <div class="text-accent text-4xl mb-4">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Нейронаука</h3>
+          <p class="text-light">Изучаем как работает человеческий мозг и как технологии могут его дополнить.</p>
+        </div>
+        <div class="glass-card rounded-xl p-6 hover-scale">
+          <div class="text-accent text-4xl mb-4">
+            <i class="fas fa-microchip"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Технологии</h3>
+          <p class="text-light">Анализируем последние разработки в области нейроинтерфейсов и ИИ.</p>
+        </div>
+        <div class="glass-card rounded-xl p-6 hover-scale">
+          <div class="text-accent text-4xl mb-4">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Будущее</h3>
+          <p class="text-light">Размышляем о том, как технологии изменят человечество в ближайшие десятилетия.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Articles Section -->
+  <section id="articles" class="py-20 bg-secondary">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Последние статьи</h2>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="glass-card rounded-xl overflow-hidden hover-scale group">
+          <div class="relative overflow-hidden h-48">
+            <img src="AIandBrain.png" alt="ИИ и мозг" 
+                 class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+          </div>
+          <div class="p-6">
+            <div class="flex items-center text-sm text-accent mb-3">
+              <span class="mr-3"><i class="far fa-calendar mr-1"></i> 15 марта 2025</span>
+              <span><i class="far fa-clock mr-1"></i></span>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-accent transition">ИИ и мозг: параллельные эволюции</h3>
+            <p class="text-light mb-4">Как искусственный интеллект повторяет структуру и функции человеческого мозга, и что это значит для будущего технологий.</p>
+            <a href="first_text.html" class="inline-flex items-center text-accent font-medium hover:underline">
+              Читать далее <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="glass-card rounded-xl overflow-hidden hover-scale group">
+          <div class="relative overflow-hidden h-48">
+            <img src="NeuroAPI.png" alt="Нейроинтерфейс" 
+                 class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+          </div>
+          <div class="p-6">
+            <div class="flex items-center text-sm text-accent mb-3">
+              <span class="mr-3"><i class="far fa-calendar mr-1"></i> 2 апреля 2025</span>
+              <span><i class="far fa-clock mr-1"></i></span>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 group-hover:text-accent transition">Нейроинтерфейсы: компьютер внутри нас</h3>
+            <p class="text-light mb-4">Обзор современных технологий, позволяющих соединить человеческий мозг с компьютерными системами и управлять устройствами силой мысли.</p>
+            <a href="second_text.html" class="inline-flex items-center text-accent font-medium hover:underline">
+              Читать далее <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!--<div class="text-center mt-12">
+        <a href="#" class="inline-flex items-center px-6 py-3 border border-accent text-accent rounded-full 
+                          hover:bg-accent hover:text-primary transition font-medium">
+          <i class="fas fa-book-open mr-2"></i> Все статьи
+        </a>
+      </div>-->
+    </div>
+  </section>
+
+  <!-- Pros/Cons Section -->
+  <section id="proscons" class="py-20 bg-gradient-to-b from-secondary to-dark">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Плюсы и минусы ИИ</h2>
+      
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="glass-card rounded-xl p-8 hover-scale">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mr-4">
+              <i class="fas fa-check text-green-400 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold">Преимущества</h3>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+              <span>Революция в медицине: точная диагностика и персонализированное лечение</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+              <span>Автоматизация рутинных задач, высвобождающая время для творчества</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+              <span>Ускорение научных исследований и технологических разработок</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+              <span>Персонализированное образование, адаптирующееся под каждого ученика</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="glass-card rounded-xl p-8 hover-scale">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center mr-4">
+              <i class="fas fa-exclamation text-red-400 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold">Риски</h3>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <i class="fas fa-exclamation-circle text-red-400 mt-1 mr-3"></i>
+              <span>Проблемы приватности и безопасности персональных данных</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-exclamation-circle text-red-400 mt-1 mr-3"></i>
+              <span>Вытеснение людей из многих профессий, социальные последствия</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-exclamation-circle text-red-400 mt-1 mr-3"></i>
+              <span>Технологическая зависимость и деградация некоторых навыков</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-exclamation-circle text-red-400 mt-1 mr-3"></i>
+              <span>Этические вопросы и потенциальная потеря контроля над ИИ</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="glass-card rounded-xl p-8 max-w-4xl mx-auto mt-8 hover-scale">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mr-4">
+            <i class="fas fa-lightbulb text-accent text-xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold">Баланс и ответственность</h3>
+        </div>
+        <p class="text-light">
+          Ключевой вызов современности — найти баланс между технологическим прогрессом и сохранением человеческих ценностей. Развитие ИИ требует ответственного подхода, прозрачности и международного сотрудничества для создания этических стандартов и регуляторных механизмов.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Future Section -->
+  <section id="future" class="py-20 bg-dark">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Будущее нейротехнологий</h2>
+      
+      <div class="relative max-w-3xl mx-auto">
+        <!-- Timeline -->
+        <div class="space-y-12 pl-8">
+          <div class="timeline-item relative pl-8">
+            <h3 class="text-2xl font-semibold mb-3 text-accent">2025–2030</h3>
+            <p class="text-light">
+              Расширение использования нейроинтерфейсов в реабилитационной медицине и протезировании. Первые потребительские гаджеты с базовым мозговым управлением.
+            </p>
+          </div>
+
+          <div class="timeline-item relative pl-8">
+            <h3 class="text-2xl font-semibold mb-3 text-accent">2030–2050</h3>
+            <p class="text-light">
+              Улучшенные нейрогаджеты становятся частью цифрового окружения. ИИ широко применяется в образовании, здравоохранении и городской инфраструктуре.
+            </p>
+          </div>
+
+          <div class="timeline-item relative pl-8">
+            <h3 class="text-2xl font-semibold mb-3 text-accent">2050–2080</h3>
+            <p class="text-light">
+              Нейротехнологии интегрируются в повседневную жизнь. Появляются комплексные человеко-машинные интерфейсы, повышающие когнитивные возможности.
+            </p>
+          </div>
+
+          <div class="timeline-item relative pl-8">
+            <h3 class="text-2xl font-semibold mb-3 text-accent">После 2080</h3>
+            <p class="text-light">
+              Формируются новые формы взаимодействия сознания и цифровых систем. Обсуждаются правовые и этические аспекты частичной цифровизации личности.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="glass-card rounded-xl p-8 max-w-4xl mx-auto mt-16 hover-scale">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+            <div class="w-32 h-32 rounded-full bg-accent/10 flex items-center justify-center">
+              <i class="fas fa-question text-accent text-4xl"></i>
+            </div>
+          </div>
+          <div class="md:w-2/3 md:pl-8">
+            <h3 class="text-2xl font-semibold mb-4">Что это значит для нас?</h3>
+            <p class="text-light">
+              Эти изменения поднимают фундаментальные вопросы о природе сознания, личности и человеческой идентичности. Мы стоим на пороге новой эры, где технологии не просто дополнят наши возможности, но могут трансформировать саму суть человеческого бытия. Подготовка к этому будущему требует не только технологических, но и философских, этических и социальных инноваций.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="py-20 bg-gradient-to-b from-dark to-primary">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Галерея</h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="group relative overflow-hidden rounded-xl hover-scale">
+          <img src="archAI.png" alt="Нейросеть" 
+               class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6 opacity-0 
+                      group-hover:opacity-100 transition duration-300">
+            <div>
+              <h3 class="text-xl font-semibold text-white">Архитектура нейросети</h3>
+              <p class="text-light text-sm mt-1">Современные модели искусственного интеллекта</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative overflow-hidden rounded-xl hover-scale">
+          <img src="brainscan.png" alt="Сканирование мозга" 
+               class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6 opacity-0 
+                      group-hover:opacity-100 transition duration-300">
+            <div>
+              <h3 class="text-xl font-semibold text-white">Картирование мозга</h3>
+              <p class="text-light text-sm mt-1">Технологии визуализации нейронной активности</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative overflow-hidden rounded-xl hover-scale">
+          <img src="neurolink.png" alt="Нейрочип" 
+               class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6 opacity-0 
+                      group-hover:opacity-100 transition duration-300">
+            <div>
+              <h3 class="text-xl font-semibold text-white">Нейроимпланты</h3>
+              <p class="text-light text-sm mt-1">Микропроцессоры, интегрируемые в мозг</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative overflow-hidden rounded-xl hover-scale">
+          <img src="VR.png" alt="Виртуальная реальность" 
+               class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6 opacity-0 
+                      group-hover:opacity-100 transition duration-300">
+            <div>
+              <h3 class="text-xl font-semibold text-white">VR и сознание</h3>
+              <p class="text-light text-sm mt-1">Иммерсивные технологии будущего</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative overflow-hidden rounded-xl hover-scale">
+          <img src="AIandHuman.png" alt="ИИ и человек" 
+               class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6 opacity-0 
+                      group-hover:opacity-100 transition duration-300">
+            <div>
+              <h3 class="text-xl font-semibold text-white">Симбиоз ИИ и человека</h3>
+              <p class="text-light text-sm mt-1">Гибридные формы интеллекта</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="group relative overflow-hidden rounded-xl hover-scale">
+          <img src="AIundying.png" alt="Цифровое сознание" 
+               class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6 opacity-0 
+                      group-hover:opacity-100 transition duration-300">
+            <div>
+              <h3 class="text-xl font-semibold text-white">Цифровое бессмертие</h3>
+              <p class="text-light text-sm mt-1">Сохранение сознания в цифровой форме</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="gallery.html" class="inline-flex items-center px-6 py-3 bg-accent text-primary rounded-full 
+                          hover:bg-accent/90 transition font-medium shadow-lg shadow-accent/20">
+          <i class="fas fa-images mr-2"></i> Смотреть все изображения
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 bg-secondary">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="#" class="text-2xl font-bold gradient-text">NeuroTech</a>
+          <p class="text-light mt-2">Исследуем границы разума и технологий</p>
+        </div>
+        
+        <!--<div class="flex space-x-6 mb-6 md:mb-0">
+          <a href="#" class="text-light hover:text-accent transition text-xl">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="#" class="text-light hover:text-accent transition text-xl">
+            <i class="fab fa-vk"></i>
+          </a>
+          <a href="#" class="text-light hover:text-accent transition text-xl">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="#" class="text-light hover:text-accent transition text-xl">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>-->
+        
+        <div class="text-light text-sm">
+          <p>© 2025 NeuroTech. Все права защищены.</p>
+          <p class="mt-1">Образовательный некоммерческий проект.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top button -->
+  <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-accent text-primary shadow-lg 
+                              flex items-center justify-center opacity-0 invisible transition-all">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // Back to top button
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Mobile menu toggle (placeholder)
+    document.querySelector('.md\\:hidden').addEventListener('click', () => {
+      alert('Мобильное меню будет реализовано в будущем обновлении');
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
